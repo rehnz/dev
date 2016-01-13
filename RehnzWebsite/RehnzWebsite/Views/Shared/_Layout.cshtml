@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+@*<body>
     <div class="navbar navbar-inverse navbar-fixed-top" >
         <div class="container">
             <div class="navbar-header">
@@ -27,17 +27,17 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container">*@
         @RenderBody()
-        <hr />
+        @*<hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Rehnz Inc.</p>
         </footer>
-    </div>
+    </div>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/freelancerScripts")
     @RenderSection("scripts", required: false)
-</body>
+@*</body>*@
 </html>
