@@ -27,6 +27,13 @@ namespace RehnzWebsite
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/FreeLancer.css"));
+
+            //new freelancer scripts
+            bundles.Add(new ScriptBundle("~/bundles/freelancerScripts").Include(
+                      "~/Scripts/cbpAnimatedHeader.js",
+                       "~/Scripts/freelancer.js",
+                        "~/Scripts/classie.js"));
+
         }
     }
 }
