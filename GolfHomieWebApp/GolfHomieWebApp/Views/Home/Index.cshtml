@@ -6,9 +6,10 @@
 
 <h3>Users</h3>
 <div ng-controller="homeController">
-  <table class="table table-striped">
+  <table class="table table-bordered">
       <tr ng-repeat="user in usersModel">
-          <td>{{ user.name }}</td>
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
       </tr>
   </table>
 </div>

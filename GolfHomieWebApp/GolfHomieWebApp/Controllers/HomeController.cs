@@ -36,6 +36,7 @@ namespace GolfHomieWebApp.Controllers
         {
             
             UsersModel users = new UsersModel();
+            users.id = 1;
             users.name = "Rene";
 
             List<UsersModel> usersList = new List<UsersModel>();
