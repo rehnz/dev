@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,9 +8,13 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/angular.js"></script>
+ 
     <script src="~/Scripts/App.js"></script>
+
 </head>
-<body ng-app ="mainApp">
+<body ng-app="mainApp">
+
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -39,7 +44,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/angular")
+
     @RenderSection("scripts", required: false)
-</bodyng-app>
+</body>
 </html>
