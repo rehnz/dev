@@ -1,6 +1,14 @@
 ﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 
 <h3>Users</h3>
 <div ng-controller="homeController">
-   <p>{{user}}</p>
+  <table class="table table-striped">
+      <tr ng-repeat="user in usersModel">
+          <td>{{ user.name }}</td>
+      </tr>
+  </table>
 </div>

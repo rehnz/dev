@@ -1,15 +1,16 @@
 ﻿
 var mainApp = angular.module('mainApp', []);
 
-mainApp.controller('homeController', function ($scope, $http)
+    mainApp.controller('homeController', function ($scope, $http)
 {
-    $http.get('Home/GetUsers/')
+    $http.get('/Home/GetUsers')
         .success(function (result) 
         {
-            $scope.user = result;
-        }
+            $scope.usersModel = (result);
+            alert(JSON.stringify(result));
+        })
         .error(function (data)
         {
-            console.log(data)
+            alert(data)
         })
-    )})
+    })

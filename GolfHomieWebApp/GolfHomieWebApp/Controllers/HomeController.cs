@@ -1,8 +1,10 @@
-﻿using System;
+﻿using System.Web.Mvc;
+using GolfHomieWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+
 
 namespace GolfHomieWebApp.Controllers
 {
@@ -25,20 +27,24 @@ namespace GolfHomieWebApp.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+            
             return View();
 
         }
-
+    
         public JsonResult GetUsers()
         {
+            
+            UsersModel users = new UsersModel();
+            users.name = "Rene";
 
+            List<UsersModel> usersList = new List<UsersModel>();
+            usersList.Add(users);
 
-            string user = "Rene";
+            return Json(usersList, JsonRequestBehavior.AllowGet);
 
-            return Json(user,JsonRequestBehavior.AllowGet);
         }
+    }
 
 
     }
-}
