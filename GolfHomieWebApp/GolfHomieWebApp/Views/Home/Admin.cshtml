@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h3>Users</h3>
+<div ng-controller="usersController">
+    <table class="table table-condensed table-hover">
+
+
+        <tr ng-repeat="user in usersModel">
+            <td>{{user.username}}</td>
+            <td>{{user.fname}}</td>
+            <td>{{user.lname}}</td>
+            <td>{{user.email}}</td>
+        </tr>
+    </table>
+</div>

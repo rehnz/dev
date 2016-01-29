@@ -167,6 +167,7 @@
     <Content Include="Content\img\portfolio\circus.png" />
     <Content Include="Content\img\portfolio\DefaultPic.png" />
     <Content Include="Content\img\portfolio\game.png" />
+    <Content Include="Content\img\portfolio\noImage.jpg" />
     <Content Include="Content\img\portfolio\safe.png" />
     <Content Include="Content\img\portfolio\submarine.png" />
     <Content Include="Content\img\profile.png" />
