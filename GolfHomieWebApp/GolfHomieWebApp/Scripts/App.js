@@ -18,13 +18,28 @@ var mainApp = angular.module('mainApp', []);
     })
 
 // Controller for Login Screen
-    mainApp.controller('loginController', function ($scope, $http) {
-        $http.get('/Home/Login')
-            .success(function (result) {
-                $scope.usersModel = JSON.parse(result);
+    mainApp.controller("loginController", function($scope, $http) {
 
+
+        $scope.user = {};
+        
+        $scope.sendForm = function ()
+        {
+            $http({ 
+                method:'POST', 
+                url: 'Home/CheckLogin/', 
+                data: $scope.user
             })
-            .error(function (errorLog) {
-                alert(errorLog)
-            })
+           
+            .success(function ()
+                   {
+                         $http.get('/Home/Admin');
+                   }
+            )
+           .error(function (reason)
+                    {
+                      alert("Error: Posting Log in Info.");
+                    }
+            );
+        }
     })
