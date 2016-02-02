@@ -35,7 +35,8 @@ var mainApp = angular.module('mainApp', []);
                    {
                         if (result.email == $scope.user.email && result.password == $scope.user.password)
                         {
-                            alert("Welcome back - " + $scope.user.username)
+                            
+                            alert("Welcome back - " + result.username)
                             $window.location.href = '/home/admin'
                         }
                         else
