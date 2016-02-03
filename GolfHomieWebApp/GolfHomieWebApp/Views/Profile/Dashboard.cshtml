@@ -3,8 +3,10 @@
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<center>
+    <h2><b>Dashboard</b></h2>
+</center>
 
-<h2>Dashboard</h2>
 
 <div class="container">
     <div class="row">
@@ -53,5 +55,30 @@
 
 
         </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div ng-controller="scoresController">
+                          
+                            <table class="table table-condensed table-hover">
+
+                                
+                                <tr ng-repeat="score in scoresModel">
+                                    <td>{{score.coursename}}</td>
+                                    <td><b>{{score.score}}</b></td>
+                                    <td>{{score.dateplayed | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+
+
+
+                        </div>
+                </div>
+
+            </div>
+            </div>
+        </div>
     </div>
-</div>
+

@@ -2,6 +2,12 @@
 var mainApp = angular.module('mainApp', []);
 
 
+mainApp.filter("jsDate", function () {
+    return function (x) {
+        return new Date(parseInt(x.substr(6)));
+    };
+});
+
 //Get a list of Users
     mainApp.controller('usersController', function ($scope, $http)
 {
@@ -17,7 +23,7 @@ var mainApp = angular.module('mainApp', []);
         })
     })
 
-// Controller for Login Screen
+// Controller to verify login
     mainApp.controller("loginController", function($scope, $http,$window) {
 
 
@@ -48,4 +54,18 @@ var mainApp = angular.module('mainApp', []);
          
            
         }
+    })
+
+//controller to get user scores
+    mainApp.controller('scoresController', function ($scope, $http) {
+        $http.get('/Profile/GetScores')
+            .success(function (result) {
+                $scope.scoresModel = JSON.parse(result);
+                for (var i in $scope.scoresModel) {
+                    $scope.scoresModel[i].dateplayed = new Date(parseInt(dateplayed.CreatedOn.substr(6)));
+                }
+            })
+            .error(function (errorLog) {
+                alert(errorLog)
+            })
     })

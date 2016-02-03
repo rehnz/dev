@@ -18,5 +18,22 @@ namespace GolfHomieWebApp.Controllers
         {
             return View();
         }
+
+        public JsonResult GetScores()
+        {
+            DataTableGenerator dtGen = new DataTableGenerator();
+            DataTable scoresDT = new DataTable();
+
+            scoresDT = dtGen.GetDataTable(@"
+                                            select users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed 
+                                            from scores  inner join users 
+                                            on scores.userid = users.id
+                                            inner join courses on courses.id = scores.courseid
+                                            where users.id = " + Convert.ToInt32(Session["id"]));
+
+            string scoresJSONString = dtGen.ConvertDataTableToJSONString(scoresDT);
+
+            return Json(scoresJSONString, JsonRequestBehavior.AllowGet);
+        }
     }
 }
