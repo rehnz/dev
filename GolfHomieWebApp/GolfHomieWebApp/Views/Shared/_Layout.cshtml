@@ -30,7 +30,7 @@
                     <div class="btn-group pull-right">
 
 
-                        @Html.ActionLink(Session["username"].ToString(), "Profile", "Profile", new { area = "" }, new { @class = "btn btn-primary dropdown-toggle" })
+                        @Html.ActionLink(Session["username"].ToString(), "Dashboard", "Profile", new { area = "" }, new { @class = "btn btn-primary dropdown-toggle" })
                         <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Account</a></li>
@@ -45,7 +45,7 @@
                 }
                 else
                 {
-                    @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "navbar-brand pull-right " })
+                    @Html.ActionLink("Login", "Index", "Home", new { area = "" }, new { @class = "navbar-brand pull-right " })
                 }
             </div>
         </div>

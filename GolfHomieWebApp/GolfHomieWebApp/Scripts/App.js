@@ -37,7 +37,7 @@ var mainApp = angular.module('mainApp', []);
                         {
                             
                             alert("Welcome back - " + result.username)
-                            $window.location.href = '/home/admin'
+                            $window.location.href = '/Profile/Dashboard'
                         }
                         else
                         {
