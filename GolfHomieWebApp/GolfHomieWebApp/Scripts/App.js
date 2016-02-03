@@ -18,7 +18,7 @@ var mainApp = angular.module('mainApp', []);
     })
 
 // Controller for Login Screen
-    mainApp.controller("loginController", function($scope, $http) {
+    mainApp.controller("loginController", function($scope, $http,$window) {
 
 
         $scope.user = {};
@@ -30,16 +30,22 @@ var mainApp = angular.module('mainApp', []);
                 url: 'Home/CheckLogin/', 
                 data: $scope.user
             })
-           if ($scope.user.email)
-            .success(function ()
+           
+            .success(function (result)
                    {
-                         $http.get('/Home/Admin');
+                        if (result.email == $scope.user.email && result.password == $scope.user.password)
+                        {
+                            
+                            alert("Welcome back - " + result.username)
+                            $window.location.href = '/Profile/Dashboard'
+                        }
+                        else
+                        {
+                            alert("fail")
+                        }
                    }
             )
-           .error(function (reason)
-                    {
-                      alert("Error: Posting Log in Info.");
-                    }
-            );
+         
+           
         }
     })
