@@ -30,7 +30,7 @@ var mainApp = angular.module('mainApp', []);
                 url: 'Home/CheckLogin/', 
                 data: $scope.user
             })
-           
+           if ($scope.user.email)
             .success(function ()
                    {
                          $http.get('/Home/Admin');

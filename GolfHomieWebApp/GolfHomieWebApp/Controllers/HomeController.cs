@@ -68,7 +68,8 @@ namespace GolfHomieWebApp.Controllers
             //use email and password to get full user model
             DataTable dt = new DataTableGenerator().GetDataTable("Select * from Users where email = '" + user.email.ToString() + "'and Password = '" + user.password.ToString() + "'");
 
-         
+                if (dt.Rows.Count == 1 )
+            { 
                 DataRow dr = dt.Rows[0];
 
 
@@ -81,8 +82,13 @@ namespace GolfHomieWebApp.Controllers
                 model.username = dr["username"].ToString();
 
                 return Json(model, JsonRequestBehavior.AllowGet);
- 
             }
+            else
+            {
+                return Json(new UsersModel(),JsonRequestBehavior.AllowGet);
+            }
+
+        }
   
            
         }
