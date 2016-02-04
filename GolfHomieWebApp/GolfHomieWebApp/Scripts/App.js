@@ -1,6 +1,7 @@
 ﻿
 var mainApp = angular.module('mainApp', []);
 
+//FILTER (Not using right now)
 
 mainApp.filter("jsDate", function () {
     return function (x) {
@@ -59,10 +60,13 @@ mainApp.filter("jsDate", function () {
 //controller to get user scores
     mainApp.controller('scoresController', function ($scope, $http) {
         $http.get('/Profile/GetScores')
-            .success(function (result) {
+            .success(function (result)
+            {
                 $scope.scoresModel = JSON.parse(result);
-                for (var i in $scope.scoresModel) {
-                    $scope.scoresModel[i].dateplayed = new Date(parseInt(dateplayed.CreatedOn.substr(6)));
+
+                for (var i in $scope.scoresModel)
+                {
+                    $scope.scoresModel[i].dateplayed = (new Date(parseInt($scope.scoresModel[i].dateplayed.substr(6)))).toJSON();
                 }
             })
             .error(function (errorLog) {

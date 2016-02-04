@@ -31,6 +31,9 @@ namespace GolfHomieWebApp.Controllers
                                             inner join courses on courses.id = scores.courseid
                                             where users.id = " + Convert.ToInt32(Session["id"]));
 
+           
+
+
             string scoresJSONString = dtGen.ConvertDataTableToJSONString(scoresDT);
 
             return Json(scoresJSONString, JsonRequestBehavior.AllowGet);

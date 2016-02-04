@@ -55,30 +55,32 @@
 
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ng-controller="scoresController">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
-                        <div ng-controller="scoresController">
-                          
-                            <table class="table table-condensed table-hover">
+                    <div class="row">                          
+                                <table class="table table-striped table-hover">
 
-                                
-                                <tr ng-repeat="score in scoresModel">
-                                    <td>{{score.coursename}}</td>
-                                    <td><b>{{score.score}}</b></td>
-                                    <td>{{score.dateplayed | date: 'yyyy-MM-dd HH:mm'}}</td>
-                                    <td></td>
-                                </tr>
-                            </table>
+                                    <thead></thead>
+                                    <tr>
+                                        <th>Course</th>
+                                        <th>Score</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tbody>
+                                        <tr ng-repeat="score in scoresModel">
+                                            <td>{{score.coursename}}</td>
+                                            <td><b>{{score.score}}</b></td>
+                                            <td>{{score.dateplayed}}</td>
 
 
-
-                        </div>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                             </div>
+                       </div>
+                  </div>
                 </div>
-
-            </div>
             </div>
         </div>
-    </div>
-
+   

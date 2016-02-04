@@ -101,6 +101,12 @@ namespace GolfHomieWebApp.Controllers
                  }
  
             }
+
+        public ActionResult SignOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index");
+        }
   
            
         }

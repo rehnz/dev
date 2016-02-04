@@ -38,8 +38,8 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-xs-6">
-                    <p class="lead">Sign up homes. <span class="text-success">!!!!</span></p>
+                <div class="col-xs-6" style="border-left:1px solid #acabab">
+                    <p class="lead">Need to Register <span class="text-success">?</span></p>
                     <ul class="list-unstyled" style="line-height: 2">
                         <li><span class="fa fa-check text-success"></span> Get your handicap!</li>
                         <li><span class="fa fa-check text-success"></span> Keep track of scores</li>
@@ -48,9 +48,44 @@
 
                         <li><a href="/read-more/"><u>More Details</u></a></li>
                     </ul>
-                    <p><a href="/new-customer/" class="btn btn-info btn-block">Register me now dawg!!</a></p>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#registerModal">Register</button>
+                </div>
+                          
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    <div id="registerModal" class="modal fade" role="dialog">
+        <div class="modal-dialog"style="position:static">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Register</h4>
+                </div>
+                <form class="form-horizontal" action='' method="POST">
+                    <div class="modal-body">
+                       
+                            <div class="control-group">
+                                <!-- email -->
+                                <div class="controls">
+                                    <label class="control-label" for="email">Email:</label>
+
+                                    <input type="text" ng-model="register.email" class="form-control" required="" title="Type in your Email" placeholder="example@gmail.com">
+
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                            </div>
+                      
+                    </div>
+                 </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
 </div>
+
+        </div>
+    </div>
