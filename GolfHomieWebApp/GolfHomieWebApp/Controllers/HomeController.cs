@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Newtonsoft.Json;
 using System.Net.Http;
+using Dapper;
 
 
 namespace GolfHomieWebApp.Controllers
@@ -107,9 +108,41 @@ namespace GolfHomieWebApp.Controllers
             Session.Abandon();
             return RedirectToAction("Index");
         }
-  
-           
+
+        public JsonResult Register(UsersModel newUser)
+        {
+
+            DataTable dt = new DataTableGenerator().GetDataTable(@"Select * from Users where email = '" + newUser.email.ToString() + "'");
+
+            if (dt.Rows.Count == 1)
+            {
+                return Json(new UsersModel(), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                UsersModel model = new UsersModel();
+                SqlTool sql = new SqlTool();
+
+                model.fname = newUser.fname;
+                model.lname = newUser.lname;
+                model.username = newUser.username;
+                model.password = newUser.password;
+                model.email = newUser.email;
+
+                sql.runQuery("Insert into Users (fname,lname,email,password,username) select '" + model.fname.ToString() + "','" +
+                    model.lname.ToString() + "','" + model.email.ToString() + "','" + model.password.ToString() + "','" +
+                    model.username + "'");
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+
         }
+
+
+    }
 
 
 

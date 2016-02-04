@@ -73,3 +73,32 @@ mainApp.filter("jsDate", function () {
                 alert(errorLog)
             })
     })
+
+//Controller to Register new user
+    mainApp.controller("registerController", function ($scope, $http, $window) {
+
+
+        $scope.registerUser = {};
+
+        $scope.sendForm = function () {
+            $http({
+                method: 'POST',
+                url: 'Home/Register/',
+                data: $scope.registerUser
+            })
+
+            .success(function (result) {
+                if (result.email == $scope.registerUser.email && result.password == $scope.registerUser.password) {
+
+                    alert("Register Complete! Please Login")
+                    $window.location.href = '/'
+                }
+                else {
+                    alert("Registration Failed")
+                }
+            }
+            )
+
+
+        }
+    })
