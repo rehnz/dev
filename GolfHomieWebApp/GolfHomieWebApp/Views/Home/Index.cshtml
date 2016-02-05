@@ -56,7 +56,7 @@
             </div>
         </div>
 
-    <div id="registerModal" class="modal fade" role="dialog">
+    <div id="registerModal" class="modal fade" role="dialog" ng-controller="registerController">
         <div class="modal-dialog"style="position:static">
 
             <!-- Modal content-->
@@ -66,24 +66,41 @@
                     <h4 class="modal-title">Register</h4>
                 </div>
 
-                <form class="form-horizontal" action='' method="POST">
+                <form class="form-horizontal" name="registerForm" ng-submit="sendForm()">
                     <div class="modal-body">
-                       
-                          
                                 <!-- email -->
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="email">Email:</label>
-                                    <input type="text" ng-model="register.email" class="form-control" required="" title="Type in your Email" placeholder="example@gmail.com">
-
+                                    <label class="col-sm-4 control-label" for="email">Email:</label>
+                                    <input type="email" ng-model="registerUser.email" class="form-control" required="" title="Type in your Email" placeholder="example@gmail.com">
+                                </div>               
+                                <!-- fname -->
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="fname">First Name:</label>
+                                    <input type="text" ng-model="registerUser.fname" class="form-control" required="" title="Type in your First Name" placeholder="First Name">
                                 </div>
-                            </div>
-                   </form>  
+                                <!-- lname -->
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="lname">Last Name::</label>
+                                    <input type="text" ng-model="registerUser.lname" class="form-control" required="" title="Type in your last name" placeholder="Last Name">
+                                </div>
+                                <!-- username -->
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="username">User Name:</label>
+                                    <input type="text" ng-model="registerUser.username" class="form-control" required="" title="Type in your User Name" placeholder="User Name">
+                                </div>
+                                 <!-- password -->
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="password">Password:</label>
+                                    <input type="password" ng-model="registerUser.password" class="form-control" required="" title="Create a password" placeholder="Password">
+                                </div>
+                                         <button type="submit" class="btn btn-info btn-block">Register</button>
                     </div>
-                 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-</div>
+                 </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+         </div>
 
-        </div>
-    </div>
+     </div>
+   

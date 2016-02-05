@@ -72,4 +72,52 @@ mainApp.filter("jsDate", function () {
             .error(function (errorLog) {
                 alert(errorLog)
             })
+
+        //Function to Add new Scores
+        $scope.addNewScore = function()
+        {
+            $http({
+                method: 'POST',
+                url: 'Profile/AddScore/',
+                data: $scope.newScore
+            })
+            .success(function(result)
+            {
+                $scope.scoresModel = JSON.parse(result);
+               
+            }
+            
+            )
+        }
+
+
+    })
+
+//Controller to Register new user
+    mainApp.controller("registerController", function ($scope, $http, $window) {
+
+
+        $scope.registerUser = {};
+
+        $scope.sendForm = function () {
+            $http({
+                method: 'POST',
+                url: 'Home/Register/',
+                data: $scope.registerUser
+            })
+
+            .success(function (result) {
+                if (result.email == $scope.registerUser.email && result.password == $scope.registerUser.password) {
+
+                    alert("Register Complete! Please Login")
+                    $window.location.href = '/'
+                }
+                else {
+                    alert("Registration Failed")
+                }
+            }
+            )
+
+
+        }
     })

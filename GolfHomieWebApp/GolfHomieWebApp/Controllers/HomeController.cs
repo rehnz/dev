@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Newtonsoft.Json;
 using System.Net.Http;
+using Dapper;
 
 
 namespace GolfHomieWebApp.Controllers
@@ -84,16 +85,21 @@ namespace GolfHomieWebApp.Controllers
                         model.lname = dr["lname"].ToString();
                         model.username = dr["username"].ToString();
 
+                     //Clear Previous SESSION
+                        Session.Clear();
+
                      //SET THE GLOBAL SESSION USER INFO
-                        Session["id"] = Convert.ToInt32(dr["id"]);
-                        Session["email"] = dr["email"].ToString();
-                        Session["password"] = dr["password"].ToString();       
-                        Session["fname"] = dr["fname"].ToString();
-                        Session["lname"] = dr["lname"].ToString();
-                        Session["username"] = dr["username"].ToString();
+                        Session["id"] = model.id;
+                        Session["email"] = model.email;
+                        Session["password"] = model.password;       
+                        Session["fname"] = model.fname;
+                        Session["lname"] = model.lname;
+                        Session["username"] = model.username;
 
 
-                        return Json(model, JsonRequestBehavior.AllowGet);
+
+
+                return Json(model, JsonRequestBehavior.AllowGet);
                  }
                  else
                  {
@@ -104,12 +110,44 @@ namespace GolfHomieWebApp.Controllers
 
         public ActionResult SignOut()
         {
-            Session.Abandon();
+            Session.Clear();
             return RedirectToAction("Index");
         }
-  
-           
+
+        public JsonResult Register(UsersModel newUser)
+        {
+
+            DataTable dt = new DataTableGenerator().GetDataTable(@"Select * from Users where email = '" + newUser.email.ToString() + "'");
+
+            if (dt.Rows.Count == 1)
+            {
+                return Json(new UsersModel(), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                UsersModel model = new UsersModel();
+                SqlTool sql = new SqlTool();
+
+                model.fname = newUser.fname;
+                model.lname = newUser.lname;
+                model.username = newUser.username;
+                model.password = newUser.password;
+                model.email = newUser.email;
+
+                sql.runQuery("Insert into Users (fname,lname,email,password,username) select '" + model.fname.ToString() + "','" +
+                    model.lname.ToString() + "','" + model.email.ToString() + "','" + model.password.ToString() + "','" +
+                    model.username + "'");
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+
         }
+
+
+    }
 
 
 
