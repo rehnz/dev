@@ -85,19 +85,19 @@
     <div id="newScoreModal" class="modal fade" role="dialog" ng-controller="scoresController">
         <div class="modal-dialog" style="position:static">
 
-            <!-- Modal content-->
+            <!--New Score Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Add Score:</h4>
                 </div>
-
+                <!--Start form-->
                 <form class="form-horizontal" name="newScoreForm" ng-submit="addNewScore()">
                     <div class="modal-body">
                         <!-- Course -->
-                        <div class="form-group">
+                        <div class="form-group" ng-controller="coursesController">
                             <center>
-                                <select class="col-sm-4 control-label" ng-model="newScore.course" ng-options="c for c in coursesList"></select>
+                                <select class="col-sm-4 control-label" ng-model="newScore.course" ng-options="course.id as course.coursename for course in coursesModel"></select>
                             </center>
                         </div>
                                

@@ -76,6 +76,8 @@ mainApp.filter("jsDate", function () {
         //Function to Add new Scores
         $scope.addNewScore = function()
         {
+
+            $scope.newScore = {};
             $http({
                 method: 'POST',
                 url: 'Profile/AddScore/',
@@ -93,31 +95,45 @@ mainApp.filter("jsDate", function () {
 
     })
 
-//Controller to Register new user
-    mainApp.controller("registerController", function ($scope, $http, $window) {
-
-
-        $scope.registerUser = {};
-
-        $scope.sendForm = function () {
-            $http({
-                method: 'POST',
-                url: 'Home/Register/',
-                data: $scope.registerUser
+    //Get a list of Courses
+    mainApp.controller('coursesController', function ($scope, $http)
+    {
+        $http.get('/Profile/GetCourses')
+            .success(function (result) 
+            {
+                $scope.coursesModel = JSON.parse(result);
+            
             })
 
-            .success(function (result) {
-                if (result.email == $scope.registerUser.email && result.password == $scope.registerUser.password) {
 
-                    alert("Register Complete! Please Login")
-                    $window.location.href = '/'
+
+        //Controller to Register new user
+        mainApp.controller("registerController", function ($scope, $http, $window) {
+
+
+            $scope.registerUser = {};
+
+            $scope.sendForm = function () {
+                $http({
+                    method: 'POST',
+                    url: 'Home/Register/',
+                    data: $scope.registerUser
+                })
+
+                .success(function (result) {
+                    if (result.email == $scope.registerUser.email && result.password == $scope.registerUser.password) {
+
+                        alert("Register Complete! Please Login")
+                        $window.location.href = '/'
+                    }
+                    else {
+                        alert("Registration Failed")
+                    }
                 }
-                else {
-                    alert("Registration Failed")
-                }
+                )
+
+
             }
-            )
-
-
-        }
+        })
     })
+        

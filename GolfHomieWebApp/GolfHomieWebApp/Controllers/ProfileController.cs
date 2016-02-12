@@ -38,5 +38,21 @@ namespace GolfHomieWebApp.Controllers
 
             return Json(scoresJSONString, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetCourses()
+        {
+            DataTableGenerator dtGen = new DataTableGenerator();
+            DataTable coursesDT = new DataTable();
+
+            coursesDT = dtGen.GetDataTable(@"SELECT id,coursename,par,blueteeRating,WhiteTeeRating,CourseSlope,AddressID From Courses");
+            
+            string coursesDTstring = dtGen.ConvertDataTableToJSONString(coursesDT);
+
+
+            return Json(coursesDTstring, JsonRequestBehavior.AllowGet);
+
+        }
+
+
     }
 }
