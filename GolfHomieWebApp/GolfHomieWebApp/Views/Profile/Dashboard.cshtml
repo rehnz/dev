@@ -97,7 +97,7 @@
                         <!-- Course -->
                         <div class="form-group" ng-controller="coursesController">
                             <center>
-                                <select class="col-sm-4 control-label" ng-model="newScore.course" ng-options="course.id as course.coursename for course in coursesModel"></select>
+                                <select class="col-sm-4 control-label" ng-model="newScore.id" ng-options="course.coursename for course in coursesModel track by course.id"></select>
                             </center>
                         </div>
                                

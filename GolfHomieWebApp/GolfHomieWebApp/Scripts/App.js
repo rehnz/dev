@@ -80,7 +80,7 @@ mainApp.filter("jsDate", function () {
             $scope.newScore = {};
             $http({
                 method: 'POST',
-                url: 'Profile/AddScore/',
+                url: '/Profile/AddScore/',
                 data: $scope.newScore
             })
             .success(function(result)
@@ -113,7 +113,8 @@ mainApp.filter("jsDate", function () {
 
             $scope.registerUser = {};
 
-            $scope.sendForm = function () {
+            $scope.sendForm = function ()
+            {
                 $http({
                     method: 'POST',
                     url: 'Home/Register/',

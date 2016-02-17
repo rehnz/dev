@@ -27,4 +27,15 @@ namespace GolfHomieWebApp.Models
      
 
     }
+    public class ScoresModel
+    {
+        public int id { get; set; }
+        public int userid { get; set; }
+        public int courseid { get; set; }
+        public int score { get; set; }
+        public decimal adjustedscore { get; set; }
+        public DateTime dateplayed { get; set; }
+
+
+    }
 }

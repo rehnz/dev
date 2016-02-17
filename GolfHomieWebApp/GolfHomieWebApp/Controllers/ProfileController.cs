@@ -53,6 +53,16 @@ namespace GolfHomieWebApp.Controllers
 
         }
 
+        public JsonResult AddScore(ScoresModel newScore)
+        {
+
+            SqlTool sqltool = new SqlTool();
+            sqltool.runQuery(@"INSERT INTO Scores (userid,courseid,score,dateplayed)
+                                        SELECT " + Session["id"] + "," + newScore.courseid + "," + newScore.score + "," + newScore.dateplayed + "");
+
+            return Json(newScore, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
