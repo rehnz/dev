@@ -74,9 +74,11 @@ mainApp.filter("jsDate", function () {
             })
 
         //Function to Add new Scores
+
+
+
         $scope.addNewScore = function()
         {
-
             $scope.newScore = {};
             $http({
                 method: 'POST',

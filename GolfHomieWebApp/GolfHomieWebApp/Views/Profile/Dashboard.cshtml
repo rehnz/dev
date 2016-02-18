@@ -82,7 +82,7 @@
                   </div>
                 </div>
             </div>
-    <div id="newScoreModal" class="modal fade" role="dialog" ng-controller="scoresController">
+    <div id="newScoreModal" class="modal fade" role="dialog">
         <div class="modal-dialog" style="position:static">
 
             <!--New Score Modal content-->
@@ -92,29 +92,30 @@
                     <h4 class="modal-title">Add Score:</h4>
                 </div>
                 <!--Start form-->
-                <form class="form-horizontal" name="newScoreForm" ng-submit="addNewScore()">
+                <form class="form-horizontal" name="newScoreForm" ng-controller="scoresController" ng-submit="addNewScore()">
                     <div class="modal-body">
                         <!-- Course -->
                         <div class="form-group" ng-controller="coursesController">
-                            <center>
-                                <select class="col-sm-4 control-label" ng-model="newScore.id" ng-options="course.coursename for course in coursesModel track by course.id"></select>
-                            </center>
+                            
+                                <label class="col-sm-4 control-label" for="course">Course:</label>
+                                <select class="form-control" ng-model="newScore.courseid" ng-options="course.id as course.coursename for course in coursesModel"> </select>
+                          
                         </div>
-                               
+
                         <!-- Score -->
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="score">Score:</label>
                             <input type="number" ng-model="newScore.score" class="form-control" required="" title="Type in your First Name" placeholder="What'd you shoot?'">
-                            </div>
-                       
+                        </div>
+
                         <!-- Date Played -->
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="dateplayed">Date Played:</label>
                             <input type="date" ng-model="newScore.dateplayed" class="form-control" required="" title="Type in your last name" placeholder="When you play?">
                         </div>
-                      
+
                         <button type="submit" class="btn btn-info btn-block">Add</button>
-               
+
                     </div>
                 </form>
                 <div class="modal-footer">
