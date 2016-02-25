@@ -1,13 +1,7 @@
 ﻿
 var mainApp = angular.module('mainApp', []);
 
-//FILTER (Not using right now)
 
-mainApp.filter("jsDate", function () {
-    return function (x) {
-        return new Date(parseInt(x.substr(6)));
-    };
-});
 
 //Get a list of Users
     mainApp.controller('usersController', function ($scope, $http)
@@ -57,45 +51,38 @@ mainApp.filter("jsDate", function () {
         }
     })
 
-//controller to get user scores
-    mainApp.controller('scoresController', function ($scope, $http) {
-        $http.get('/Profile/GetScores')
-            .success(function (result)
+//controller for the Dashboard View
+    mainApp.controller('dashboardController',function ($scope,dashboardFactory,$http)
             {
-                $scope.scoresModel = JSON.parse(result);
+               var scoresModel =  dashboardFactory.getScores();
+                
 
-                for (var i in $scope.scoresModel)
-                {
-                    $scope.scoresModel[i].dateplayed = (new Date(parseInt($scope.scoresModel[i].dateplayed.substr(6)))).toJSON();
-                }
-            })
-            .error(function (errorLog) {
-                alert(errorLog)
             })
 
-        //Function to Add new Scores
 
-
-
-        $scope.addNewScore = function()
+//Factory for DashBoard View
+    mainApp.factory('dashboardFactory', function ($http)
+    {
+        var getScores = function ()
         {
-            $scope.newScore = {};
-            $http({
-                method: 'POST',
-                url: '/Profile/AddScore/',
-                data: $scope.newScore
-            })
-            .success(function(result)
+            $http.get("/Profile/GetScores").success(function (result)
+
             {
-                $scope.scoresModel = JSON.parse(result);
-               
-            }
-            
-            )
+                var scoresModel = JSON.parse(result);
+
+                for (var i in scoresModel)
+                {
+                    scoresModel[i].dateplayed = (new Date(parseInt(scoresModel[i].dateplayed.substr(6)))).toJSON();
+                }
+                return (scoresModel)
+                
+            })
         }
-
-
+            return getScores();
     })
+
+      
+          
 
     //Get a list of Courses
     mainApp.controller('coursesController', function ($scope, $http)
