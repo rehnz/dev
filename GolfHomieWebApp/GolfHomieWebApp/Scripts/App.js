@@ -53,47 +53,60 @@ var mainApp = angular.module('mainApp', []);
 
 //controller for the Dashboard View
     mainApp.controller('dashboardController',function ($scope,dashboardFactory,$http)
-            {
-               var scoresModel =  dashboardFactory.getScores();
-                
+    {
 
-            })
+        dashboardFactory.getScores().success(function (data)
+        {
+           
+            $scope.scoresModel = JSON.parse(data)
+
+            for (var i in $scope.scoresModel)
+            {
+                $scope.scoresModel[i].dateplayed = (new Date(parseInt($scope.scoresModel[i].dateplayed.substr(6)))).toJSON();
+            }
+        }).error(function ()
+            {
+              //error logic
+           
+        })
+
+        dashboardFactory.getCourses().success(function(courseData)
+        {
+            $scope.coursesModel = JSON.parse(courseData);
+        })
+        
+        })
 
 
 //Factory for DashBoard View
     mainApp.factory('dashboardFactory', function ($http)
     {
-        var getScores = function ()
+        var data = {};
+        data.getScores = function ()
         {
-            $http.get("/Profile/GetScores").success(function (result)
-
+            return $http.get("/Profile/GetScores").success(function (scoresData)
             {
-                var scoresModel = JSON.parse(result);
+           
 
-                for (var i in scoresModel)
-                {
-                    scoresModel[i].dateplayed = (new Date(parseInt(scoresModel[i].dateplayed.substr(6)))).toJSON();
-                }
-                return (scoresModel)
-                
+                return scoresData;
+
+            });         
+        }
+
+        data.getCourses = function ()
+        {
+            return $http.get('/Profile/GetCourses').success(function(coursesData)
+            
+            {
+                return coursesData;
             })
         }
-            return getScores();
+        return data;
+           
     })
 
       
-          
-
-    //Get a list of Courses
-    mainApp.controller('coursesController', function ($scope, $http)
-    {
-        $http.get('/Profile/GetCourses')
-            .success(function (result) 
-            {
-                $scope.coursesModel = JSON.parse(result);
-            
-            })
-
+         
 
 
         //Controller to Register new user
@@ -125,5 +138,5 @@ var mainApp = angular.module('mainApp', []);
 
             }
         })
-    })
+    
         

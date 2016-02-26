@@ -22,14 +22,14 @@
                             <p>
                                 <strong>Handicap: </strong>
                                 <span class="label label-success tags">13</span>
-                               
+
                             </p>
                         </div><!--/col-->
                         <div class="col-xs-12 col-sm-4 text-center">
                             <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="" class="center-block img-circle img-responsive">
                             <ul class="list-inline ratings text-center" title="Ratings">
                                 <li><a href="#">@Session["username"]</a></li>
-                                
+
                             </ul>
                         </div><!--/col-->
 
@@ -58,30 +58,30 @@
         <div class="col-md-6" ng-controller="dashboardController">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">                          
-                                <table class="table table-striped table-hover">
+                    <div class="row">
+                        <table class="table table-striped table-hover">
 
-                                    <thead></thead>
-                                    <tr>
-                                        <th>Course</th>
-                                        <th>Score</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tbody>
-                                        <tr ng-repeat="score in scoresModel">
-                                            <td>{{score.coursename}}</td>
-                                            <td><b>{{score.score}}</b></td>
-                                            <td>{{score.dateplayed}}</td>
+                            <thead></thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Score</th>
+                                <th>Date</th>
+                            </tr>
+                            <tbody>
+                                <tr ng-repeat="score in scoresModel">
+                                    <td>{{score.coursename}}</td>
+                                    <td><b>{{score.score}}</b></td>
+                                    <td>{{score.dateplayed}}</td>
 
 
-                                        </tr>
-                                    </tbody>
-                                </table>
-                             </div>
-                       </div>
-                  </div>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
     <div id="newScoreModal" class="modal fade" role="dialog">
         <div class="modal-dialog" style="position:static">
 
@@ -92,14 +92,16 @@
                     <h4 class="modal-title">Add Score:</h4>
                 </div>
                 <!--Start form-->
-                <form class="form-horizontal" name="newScoreForm" ng-controller="scoresController" ng-submit="addNewScore()">
+                <form class="form-horizontal" name="newScoreForm">
                     <div class="modal-body">
                         <!-- Course -->
-                        <div class="form-group" ng-controller="coursesController">
-                            
-                                <label class="col-sm-4 control-label" for="course">Course:</label>
-                                <select class="form-control" ng-model="newScore.courseid" ng-options="course.id as course.coursename for course in coursesModel"> </select>
-                          
+                        <div class="form-group">
+
+                            <label class="col-sm-4 control-label" for="coursesModel">Course:</label>
+                            <select class="form-control">
+                                <option ng-repeat="course in coursesModel" value="{{course.id}}">{{course.coursename}}</option>
+                            </select>
+
                         </div>
 
                         <!-- Score -->
@@ -128,5 +130,5 @@
 
 
 
-        </div>
+</div>
    
