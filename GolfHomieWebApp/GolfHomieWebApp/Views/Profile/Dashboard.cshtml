@@ -8,10 +8,9 @@
 </center>
 
 
-
-
 <div class="container" ng-controller="dashboardController" ng-init="getMasterData()">
-    <div class=" row">
+    <div class="row">
+
     <div class="col-md-6">
 
         <div class="panel panel-default">
@@ -100,8 +99,9 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label" for="coursesModel">Course:</label>
-                            <select class="form-control" ng-model="newScore.courseid">
-                                <option ng-repeat="course in coursesModel" value="{{course.id}}">{{course.coursename}}</option>
+                            <select class="form-control" required ng-model="newScore.courseid">
+                                <option></option>
+                                <option  ng-repeat="course in coursesModel" value="{{course.id}}">{{course.coursename}}</option>
                             </select>
 
                         </div>
@@ -121,6 +121,7 @@
                                    uib-datepicker-popup="{{format}}"
                                    ng-model="newScore.dateplayed"
                                    is-open="opened"
+                                   placeholder="Choose a Date!"
                                    uib-datepicker-options="dateOptions"
                                    ng-required="true"
                                    close-text="Close"

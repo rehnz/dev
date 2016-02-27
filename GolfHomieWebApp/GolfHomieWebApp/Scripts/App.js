@@ -54,7 +54,8 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
 //controller for the Dashboard View
     mainApp.controller('dashboardController',function ($scope,dashboardFactory,$http)
     {
-        $scope.getMasterData = function () {
+        $scope.getMasterData = function ()
+        {
             dashboardFactory.getScores().success(function (data) {
 
                 $scope.scoresModel = JSON.parse(data)
@@ -65,13 +66,13 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
             }).error(function () {
                 //error logic
 
-            })
+            });
 
             dashboardFactory.getCourses().success(function (courseData) {
                 $scope.coursesModel = JSON.parse(courseData);
 
             })
-        }
+        };
         
         $scope.newScore = {};
     
@@ -82,12 +83,16 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                 url: '/Profile/AddScore/', 
                 data: $scope.newScore
             }).success(function (result) {
-                alert("Score Added")
-                
+                alert("Score Added")   
+                $scope.getMasterData();
+                $scope.newScore = null;
+
             })
 
-            $scope.getMasterData()
+          // can do another thing here...
         }
+
+      
     })
 
 
@@ -185,3 +190,55 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
             $scope.format = $scope.formats[3];
 
         }]);
+
+
+
+
+
+
+
+
+
+        var hudControllers = angular.module('hudControllers', []);
+
+        hudControllers.controller('PropertyDetailsCtrl', 
+          ['$scope','$window','$http', function ($scope,$window,$http) {
+
+              //I want to reload this once the newCommentForm below has been submitted
+              $scope.initFirst=function()
+              {
+
+
+                  $http.get('/api/comments')
+                   .success(function(data) {})
+                   .error(function(data) {});
+
+                       //You need to define your required $scope.....
+
+                       $scope.myVariable=data;
+
+              };
+
+              $scope.newCommentForm = function(){
+
+                  newComment=$scope.newComment;
+                  requestUrl='/api/comments';
+                  var request = $http({method: "post",url: requestUrl,data: {}});
+                  request.success(function(data){
+                      //How do I refresh/reload the comments?
+                      //without calling anything else, you can update your $scope.myVariable here directly like this
+
+
+                      $scope.myVariable=data
+
+
+                  });
+
+                  //or else you can call 'initFirst()' method whenever and wherever needed like this,
+
+                  $scope.initFirst();
+
+
+              };
+
+          }]);

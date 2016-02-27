@@ -57,7 +57,7 @@ namespace GolfHomieWebApp.Controllers
         {
             if (newScore == null || Session["id"] == null)
             {
-                return RedirectToAction("Error");
+              //  return RedirectToAction("Error");
             }
 
             SqlTool sqltool = new SqlTool();
