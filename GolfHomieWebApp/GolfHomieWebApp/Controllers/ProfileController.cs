@@ -25,11 +25,11 @@ namespace GolfHomieWebApp.Controllers
             DataTable scoresDT = new DataTable();
 
             scoresDT = dtGen.GetDataTable(@"
-                                            select users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed 
+                                            select top 10 users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed 
                                             from scores  inner join users 
                                             on scores.userid = users.id
                                             inner join courses on courses.id = scores.courseid
-                                            where users.id = " + Convert.ToInt32(Session["id"]));
+                                            where users.id = " + Convert.ToInt32(Session["id"]) + "order by scores.dateplayed DESC");
 
            
 
@@ -55,10 +55,17 @@ namespace GolfHomieWebApp.Controllers
 
         public JsonResult AddScore(ScoresModel newScore)
         {
+            if (newScore == null || Session["id"] == null)
+            {
+                return RedirectToAction("Error");
+            }
 
             SqlTool sqltool = new SqlTool();
-            sqltool.runQuery(@"INSERT INTO Scores (userid,courseid,score,dateplayed)
-                                        SELECT " + Session["id"] + "," + newScore.courseid + "," + newScore.score + "," + newScore.dateplayed + "");
+
+            string newScoreSQL = String.Format(@"INSERT INTO Scores(userid,courseid,score,dateplayed,adjustedscore) SELECT {0},{1},{2},'{3}',{4}",
+                                                                    Session["id"], newScore.courseid, newScore.score, newScore.dateplayed.ToShortDateString(), 50);
+            
+            sqltool.runQuery(newScoreSQL);
 
             return Json(newScore, JsonRequestBehavior.AllowGet);
         }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections;
+
 namespace GolfHomieWebApp.Models
 {
     public class SqlTool
@@ -20,6 +22,7 @@ namespace GolfHomieWebApp.Models
             command.ExecuteNonQuery();
             con.Close();
         }
-
     }
 }
+
+    

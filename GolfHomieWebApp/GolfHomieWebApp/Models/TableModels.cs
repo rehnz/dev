@@ -34,6 +34,11 @@ namespace GolfHomieWebApp.Models
         public int courseid { get; set; }
         public int score { get; set; }
         public decimal adjustedscore { get; set; }
+        
+
+
+[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", 
+               ApplyFormatInEditMode = true)]
         public DateTime dateplayed { get; set; }
 
 
