@@ -62,10 +62,10 @@ namespace GolfHomieWebApp.Controllers
 
             SqlTool sqltool = new SqlTool();
 
-            string newScoreSQL = String.Format(@"INSERT INTO Scores(userid,courseid,score,dateplayed,adjustedscore) SELECT {0},{1},{2},'{3}',{4}",
+            string newScoreInsert = String.Format(@"INSERT INTO Scores(userid,courseid,score,dateplayed,adjustedscore) SELECT {0},{1},{2},'{3}',{4}",
                                                                     Session["id"], newScore.courseid, newScore.score, newScore.dateplayed.ToShortDateString(), 50);
             
-            sqltool.runQuery(newScoreSQL);
+            sqltool.runQuery(newScoreInsert);
 
             return Json(newScore, JsonRequestBehavior.AllowGet);
         }

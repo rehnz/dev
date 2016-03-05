@@ -160,7 +160,7 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
     
 
 
-        mainApp.controller("DatepickerDemoCtrl", ["$scope", function ($scope) {
+        mainApp.controller("datepickerController", ["$scope", function ($scope) {
 
             // grab today and inject into field
             $scope.today = function () {
