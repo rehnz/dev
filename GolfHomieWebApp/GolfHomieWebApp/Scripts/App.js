@@ -92,6 +92,11 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
           // can do another thing here...
         }
 
+        $scope.deleteScore = function(index)
+        {
+            alert("Deleting record : " + index);
+        }
+
       
     })
 

@@ -25,7 +25,7 @@ namespace GolfHomieWebApp.Controllers
             DataTable scoresDT = new DataTable();
 
             scoresDT = dtGen.GetDataTable(@"
-                                            select top 10 users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed 
+                                            select top 10 scores.id,users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed 
                                             from scores  inner join users 
                                             on scores.userid = users.id
                                             inner join courses on courses.id = scores.courseid
@@ -55,10 +55,7 @@ namespace GolfHomieWebApp.Controllers
 
         public JsonResult AddScore(ScoresModel newScore)
         {
-            if (newScore == null || Session["id"] == null)
-            {
-              //  return RedirectToAction("Error");
-            }
+           
 
             SqlTool sqltool = new SqlTool();
 
@@ -70,6 +67,10 @@ namespace GolfHomieWebApp.Controllers
             return Json(newScore, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Error()
+        {
+            return View("Error");
+        }
 
     }
 }

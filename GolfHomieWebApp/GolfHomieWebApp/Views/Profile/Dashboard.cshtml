@@ -3,145 +3,201 @@
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+
+@{
+    if (Session["id"] == null)
+    {
+
+        Html.RenderAction("Error");
+    }
+
+    else
+    { 
+
+
 <center>
     <h2><b>Dashboard</b></h2>
 </center>
 
 
-<div class="container" ng-controller="dashboardController" ng-init="getMasterData()">
-    <div class="row">
-
-    <div class="col-md-6">
-
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-8">
-                        <h2>@Session["fname"] @Session["lname"]</h2>
-                        <p><strong>About: </strong> Golfer </p>
-                        <p><strong>Quote: </strong> Ballin outta control' </p>
-                        <p>
-                            <strong>Handicap: </strong>
-                            <span class="label label-success tags">13</span>
-
-                        </p>
-                    </div><!--/col-->
-                    <div class="col-xs-12 col-sm-4 text-center">
-                        <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="" class="center-block img-circle img-responsive">
-                        <ul class="list-inline ratings text-center" title="Ratings">
-                            <li><a href="#">@Session["username"]</a></li>
-
-                        </ul>
-                    </div><!--/col-->
-
-                    <div class="col-xs-12 col-sm-4">
-                        <h2><strong> - </strong></h2>
-                        <p><small>Something</small></p>
-                        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#newScoreModal"><span class="fa fa-plus-circle"></span> Click </button>
-                    </div><!--/col-->
-                    <div class="col-xs-12 col-sm-4">
-                        <h2><strong>-</strong></h2>
-                        <p><small>Something</small></p>
-                        <button class="btn btn-info btn-block"><span class="fa fa-user"></span> Click </button>
-                    </div><!--/col-->
-                    <div class="col-xs-12 col-sm-4">
-                        <h2><strong>-</strong></h2>
-                        <p><small>Something</small></p>
-                        <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> Click </button>
-                    </div><!--/col-->
-                </div><!--/row-->
-            </div><!--/panel-body-->
-        </div><!--/panel-->
+    <div class="container" ng-controller="dashboardController" ng-init="getMasterData()">
 
 
+        <div class="col-md-6">
 
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <table class="table table-striped table-hover">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            <h2>@Session["fname"] @Session["lname"]</h2>
+                            <p><strong>About: </strong> Golfer </p>
+                            <p><strong>Quote: </strong> Ballin outta control' </p>
+                            <p>
+                                <strong>Handicap: </strong>
+                                <span class="label label-success tags">13</span>
 
-                        <thead></thead>
-                        <tr>
-                            <th>Course</th>
-                            <th>Score</th>
-                            <th>Date</th>
-                        </tr>
-                        <tbody>
-                            <tr ng-repeat="score in scoresModel">
-                                <td>{{score.coursename}}</td>
-                                <td><b>{{score.score}}</b></td>
-                                <td>{{score.dateplayed}}</td>
+                            </p>
+                        </div><!--/col-->
+                        <div class="col-xs-12 col-sm-4 text-center">
+                            <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="" class="center-block img-circle img-responsive">
+                            <ul class="list-inline ratings text-center" title="Ratings">
+                                <li><a href="#">@Session["username"]</a></li>
+
+                            </ul>
+                        </div><!--/col-->
 
 
-                            </tr>
-                        </tbody>
-                    </table>
+                    </div><!--/row-->
+                </div><!--/panel-body-->
+
+            </div><!--/panel-->
+            <div class="panel panel-default panel-success">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            Show homies here? Their latest scores or someshit
+                        </div><!--/col-->
+
+
+                    </div><!--/row-->
+                </div><!--/panel-body-->
+
+            </div>
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Stats
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                         Stats or Someshit here , Maybe a Graph of handicap (Up or Down)
+                        </div><!--/col-->
+
+
+                    </div><!--/row-->
+                </div><!--/panel-body-->
+
+            </div>
+            </div>
+
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <table class="table table-responsive table-hover">
+
+                            <thead>
+                                <tr style="font-size:20px;">
+                                    <th>Course</th>
+                                    <th>Score</th>
+                                    <th>Date</th>
+                                    <th>Latest 10:</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="score in scoresModel">
+                                    <td>{{score.coursename}}</td>
+                                    <td style="color:#3a8b5a"><b>{{score.score}}</b></td>
+                                    <td>{{score.dateplayed}}
+                                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" ng- ng-click="deleteScore(score.id)" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                        <div class="col-xs-12 col-sm-4">
+                            <h2><strong> - </strong></h2>
+                            <p><small>Something</small></p>
+                            <button class="btn btn-success btn-block" data-toggle="modal" data-target="#newScoreModal"><span class="fa fa-plus-circle"></span> Add Score </button>
+                        </div><!--/col-->
+                        <div class="col-xs-12 col-sm-4">
+                            <h2><strong>-</strong></h2>
+                            <p><small>Something</small></p>
+                            <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View All Scores </button>
+                        </div><!--/col-->
+                        <div class="col-xs-12 col-sm-4">
+                            <h2><strong>-</strong></h2>
+                            <p><small>Something</small></p>
+                            <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> Click </button>
+                        </div><!--/col-->
+                    </div>
                 </div>
             </div>
+
+
         </div>
-    </div>
-</div>
-    <div id="newScoreModal" class="modal fade" role="dialog">
-        <div class="modal-dialog" style="position:static">
-
-            <!--New Score Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add Score:</h4>
-                </div>
-                <!--Start form-->
-                <form class="form-horizontal" name="newScoreForm" ng-submit="sendForm()">
-                    <div class="modal-body">
-                        <!-- Course -->
-                        <div class="form-group">
-
-                            <label class="col-sm-4 control-label" for="coursesModel">Course:</label>
-                            <select class="form-control" required ng-model="newScore.courseid">
-                                <option></option>
-                                <option  ng-repeat="course in coursesModel" value="{{course.id}}">{{course.coursename}}</option>
-                            </select>
-
-                        </div>
-
-                        <!-- Score -->
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="score">Score:</label>
-                            <input type="number" ng-model="newScore.score" class="form-control" required="" title="Type in your First Name" placeholder="What'd you shoot?'">
-                        </div>
-
-                        <!-- Date Played -->
-                        <div class="form-group" ng-controller="DatepickerDemoCtrl">
-                            <label class="col-sm-4 control-label" for="dateplayed">Date Played:</label>
 
 
-                            <input type="text" class="form-control"
-                                   uib-datepicker-popup="{{format}}"
-                                   ng-model="newScore.dateplayed"
-                                   is-open="opened"
-                                   placeholder="Choose a Date!"
-                                   uib-datepicker-options="dateOptions"
-                                   ng-required="true"
-                                   close-text="Close"
-                                   id="date-picker"
-                                   ng-click="open($event)" />
+
+
+                    <div id="newScoreModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog" style="position:static">
+
+                            <!--New Score Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Add Score:</h4>
+                                </div>
+                                <!--Start form-->
+                                <form class="form-horizontal" name="newScoreForm" ng-submit="sendForm()">
+                                    <div class="modal-body">
+                                        <!-- Course -->
+                                        <div class="form-group">
+
+                                            <label class="col-sm-4 control-label" for="coursesModel">Course:</label>
+                                            <select class="form-control" required ng-model="newScore.courseid">
+                                                <option></option>
+                                                <option ng-repeat="course in coursesModel" value="{{course.id}}">{{course.coursename}}</option>
+                                            </select>
+
+                                        </div>
+
+                                        <!-- Score -->
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="score">Score:</label>
+                                            <input type="number" ng-model="newScore.score" class="form-control" required="" title="Type in your First Name" placeholder="What'd you shoot?'">
+                                        </div>
+
+                                        <!-- Date Played -->
+                                        <div class="form-group" ng-controller="DatepickerDemoCtrl">
+                                            <label class="col-sm-4 control-label" for="dateplayed">Date Played:</label>
+
+
+                                            <input type="text" class="form-control"
+                                                   uib-datepicker-popup="{{format}}"
+                                                   ng-model="newScore.dateplayed"
+                                                   is-open="opened"
+                                                   placeholder="Choose a Date!"
+                                                   uib-datepicker-options="dateOptions"
+                                                   ng-required="true"
+                                                   close-text="Close"
+                                                   id="date-picker"
+                                                   ng-click="open($event)" />
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-info btn-block">Add</button>
+                                </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info btn-block">Add</button>
-                </form>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-               
-        
-   </div>
- </div>
 
-</div>
+                </div>
 
 
 
-   
+
+                }
+                }
