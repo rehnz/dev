@@ -1,0 +1,61 @@
+﻿body {
+}
+
+
+     .full button span {
+         background-color: limegreen;
+         border-radius: 32px;
+         color: black;
+     }
+
+
+     .partially button span {
+         background-color: orange;
+         border-radius: 32px;
+         color: black;
+     }
+     /* .datpicker .text-info contains text for today's date but
+    it dosn't work when we are not showing the current month */
+     .uib-datepicker .text-info {
+         font-size: 14px;
+         color: black;
+     }
+     /* .datpicker .btn-info contains selected date */
+     .uib-datepicker .btn-info {
+         font-size: 14px;
+         font-weight: bold;
+         background-color: black;
+     }
+
+     .uib-datepicker .btn:disabled {
+         font-size: 14px;
+         font-weight: normal;
+         color: gray;
+     }
+
+         .uib-datepicker .btn:disabled > .text-muted {
+             font-size: 14px;
+             font-weight: normal;
+             color: gray;
+         }
+
+     .uib-datepicker .text-muted {
+         font-size: 14px;
+         font-weight: bold;
+         color: gray;
+     }
+
+     .uib-datepicker .btn:enabled {
+         font-size: 14px;
+         font-weight: bold;
+         color: #0e0e0e;
+         background-color:whitesmoke;
+     }
+
+     .uib-datepicker .btn:hover {
+         font-size: 14px;
+         font-weight: bold;
+         color: #2c7086;
+         background-color:whitesmoke;
+     }
+

@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Golf Homie</title>
         @Styles.Render("~/Content/css")
         <link href="~/Content/Sandstone.css" rel="stylesheet" />
+         <link href="~/Content/Custom.css" rel="stylesheet" />
         @Scripts.Render("~/bundles/modernizr")
   
 </head>
@@ -18,6 +19,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a class="navbar-brand" rel="home" href="#" title="">
+                    <img style="max-width:35px; margin-top: -7px;"
+                         src="~/Content/images/penguinBandana.png">
+                </a>
                 @Html.ActionLink("Golf Homie", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
                 @Html.ActionLink("Admin", "Admin", "Home", new { area = "" }, new { @class = "navbar-brand" })
@@ -28,8 +33,8 @@
                     <div class="btn-group pull-right">
 
 
-                        @Html.ActionLink(Session["username"].ToString(), "Dashboard", "Profile", new { area = "" }, new { @class = "btn btn-primary dropdown-toggle" })
-                        <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                        @Html.ActionLink(Session["username"].ToString(), "Dashboard", "Profile", new { area = "" }, new { @class = "btn btn-success dropdown-toggle" })
+                        <a href="#" class="btn btn-success dropdown-toggle" style="border: 1px solid gray" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Account</a></li>
                             <li><a href="#">Settings</a></li>
@@ -48,7 +53,8 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" >
+        
         @RenderBody()
   
         

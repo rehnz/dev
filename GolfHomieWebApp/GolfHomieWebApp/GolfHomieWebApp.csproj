@@ -145,6 +145,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom.css" />
+    <Content Include="Content\images\golf-icon-70764.png" />
+    <Content Include="Content\images\golfHomieBandana.png" />
+    <Content Include="Content\images\golfHomieBandanaGreenFullSize.png" />
+    <Content Include="Content\images\penguinBandana.png" />
     <Content Include="Content\Sandstone.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
