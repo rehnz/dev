@@ -73,16 +73,16 @@ namespace GolfHomieWebApp.Controllers
         }
 
 
-        public JsonResult DeleteScore(int scoreid)
+        public JsonResult DeleteScore(ScoresModel score)
         {
 
-
+            
             SqlTool sqltool = new SqlTool();
 
-            string deleteScoreQuery = string.Format("Delete from Scores where id = {0]", scoreid);
+            string deleteScoreQuery = string.Format("Delete from Scores where id = {0]", score.id);
             sqltool.runQuery(deleteScoreQuery);
 
-            return Json(scoreid, JsonRequestBehavior.AllowGet);
+            return Json(score.id, JsonRequestBehavior.AllowGet);
 
 
 

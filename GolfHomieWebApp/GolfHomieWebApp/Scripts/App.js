@@ -92,14 +92,14 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
           // can do another thing here...
         }
 
-        $scope.deleteScore = function(scoreid)
+        $scope.deleteScore = function(id)
         {
-            alert("Deleting record : " + scoreid);
-           $http({
-                method: 'POST',
+            $scope.id = id;
+            $http({
+                method:'POST',
                 url: '/Profile/DeleteScore/',
-                data: scoreid
-            })
+                data: $scope.id
+            }).success(alert("Deleting record : " + $scope.id))
             $scope.getMasterData();
         }
 
