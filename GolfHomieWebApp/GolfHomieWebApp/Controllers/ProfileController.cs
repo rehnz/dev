@@ -72,5 +72,22 @@ namespace GolfHomieWebApp.Controllers
             return View("Error");
         }
 
+
+        public JsonResult DeleteScore(int scoreid)
+        {
+
+
+            SqlTool sqltool = new SqlTool();
+
+            string deleteScoreQuery = string.Format("Delete from Scores where id = {0]", scoreid);
+            sqltool.runQuery(deleteScoreQuery);
+
+            return Json(scoreid, JsonRequestBehavior.AllowGet);
+
+
+
+
+        }
+
     }
 }
