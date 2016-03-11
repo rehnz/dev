@@ -58,13 +58,12 @@ namespace GolfHomieWebApp.Controllers
            
 
             SqlTool sqltool = new SqlTool();
-
             string newScoreInsert = String.Format(@"INSERT INTO Scores(userid,courseid,score,dateplayed,adjustedscore) SELECT {0},{1},{2},'{3}',{4}",
                                                                     Session["id"], newScore.courseid, newScore.score, newScore.dateplayed.ToShortDateString(), 50);
             
             sqltool.runQuery(newScoreInsert);
-
             return Json(newScore, JsonRequestBehavior.AllowGet);
+            
         }
 
         public ActionResult Error()
@@ -73,18 +72,21 @@ namespace GolfHomieWebApp.Controllers
         }
 
 
-        public JsonResult DeleteScore(ScoresModel score)
+        public JsonResult DeleteScore(ScoresModel scoreToDelete)
         {
 
             
             SqlTool sqltool = new SqlTool();
 
-            string deleteScoreQuery = string.Format("Delete from Scores where id = {0]", score.id);
+            int scoreid = scoreToDelete.id;
+
+
+            string deleteScoreQuery = @"Delete from Scores where id = " + scoreid;
             sqltool.runQuery(deleteScoreQuery);
 
-            return Json(score.id, JsonRequestBehavior.AllowGet);
+            return Json(null, JsonRequestBehavior.AllowGet);
 
-
+            
 
 
         }
