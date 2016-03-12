@@ -18,7 +18,7 @@ html {
 
 body {
     margin: 0;
-
+   
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
@@ -3878,7 +3878,7 @@ tbody.collapse.in {
         .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
             text-decoration: none;
             color: #ffffff;
-            background-color: #375a7f;
+            background-color: #00bc8c;
         }
 
     .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
@@ -3940,6 +3940,7 @@ tbody.collapse.in {
     right: 0;
     left: auto;
 }
+
 
 .dropup .caret, .navbar-fixed-bottom .dropdown .caret {
     border-top: 0;
@@ -4980,8 +4981,8 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     }
 
 .navbar-inverse {
-    background-color: #00bc8c;
-    border-color: transparent;
+    background-color: #464545
+    
 }
 
     .navbar-inverse .navbar-brand {
@@ -4989,7 +4990,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     }
 
         .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
-            color: #375a7f;
+            color: #00bc8c;
             background-color: transparent;
         }
 
@@ -5051,7 +5052,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     }
 
         .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
-            color: #375a7f;
+            color: #00bc8c;
             background-color: transparent;
         }
 

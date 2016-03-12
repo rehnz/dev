@@ -19,7 +19,8 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
     })
 
 // Controller to verify login
-    mainApp.controller("loginController", function($scope, $http,$window) {
+    mainApp.controller("loginController", function ($scope, $http, $window)
+    {
 
 
         $scope.user = {};
@@ -37,7 +38,7 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                         if (result.email == $scope.user.email && result.password == $scope.user.password)
                         {
                             
-                            alert("Welcome back - " + result.username)
+                            alert("Welcome - " + result.username)
                             $window.location.href = '/Profile/Dashboard'
                         }
                         else
@@ -54,14 +55,17 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
 //controller for the Dashboard View
     mainApp.controller('dashboardController',function ($scope,dashboardFactory,$http)
     {
+
+        $scope.scoresModel  = {}
         $scope.getMasterData = function ()
         {
             dashboardFactory.getScores().success(function (data) {
 
-                $scope.scoresModel = JSON.parse(data)
+                $scope.scoresData = JSON.parse(data)
 
-                for (var i in $scope.scoresModel) {
-                    $scope.scoresModel[i].dateplayed = (new Date(parseInt($scope.scoresModel[i].dateplayed.substr(6)))).toJSON();
+                for (var i in $scope.scoresData) {
+                    $scope.scoresData[i].dateplayed = (new Date(parseInt($scope.scoresData[i].dateplayed.substr(6)))).toJSON();
+                    $scope.scoresModel = $scope.scoresData;
                 }
             }).error(function () {
                 //error logic
@@ -74,10 +78,14 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
             })
         };
         
-        $scope.newScore = {};
+      
     
+        // SEND THE ADD SCORE FORM
+        $scope.newScore = {};
         $scope.sendForm = function ()
         {
+
+
             $http({ 
                 method:'POST', 
                 url: '/Profile/AddScore/', 
@@ -89,19 +97,64 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
 
             })
 
-          // can do another thing here...
+          
         }
 
-        $scope.deleteScore = function(index)
+
+        ///Function to Delete Scores
+        $scope.scoreToDelete = {};
+        $scope.deleteScore = function(id,courseid,dateplayed,score)
         {
-            alert("Deleting record : " + index);
+
+            $scope.scoreToDelete.id = id
+            $scope.scoreToDelete.courseid = courseid;
+            $scope.scoreToDelete.dateplayed = dateplayed;
+            $scope.scoreToDelete.score = score;
+
+            $http
+                ({
+                    method: 'POST',
+                    url: '/Profile/DeleteScore',
+                    data: $scope.scoreToDelete
+                }).success(function()
+                        {
+                            alert("Score Deleted")
+                            $scope.getMasterData();
+                            $scope.scoreToDelete = {};
+                        })
+
         }
+      
+
+
+        ///Edit Scores
+
+        $scope.editScoresData = {}
+
+        for (var i = 0, length = $scope.scoresModel.length; i < length; i++) {
+            $scope.editScoresData[$scope.scoresModel[i].id] = false;
+        }
+
+        $scope.editScore = function (score) {
+            $scope.editScoresData[score.id] = true;
+        };
+
+        $scope.update = function (score) {
+
+            $http({
+                method: 'POST',
+                url: '/Profile/UpdateScore',
+
+
+            })
+            $scope.editScoresData[score.id] = false;
+        };
 
       
     })
 
 
-        //Factory for DashBoard View
+        //Factory for DashBoard View Data Load
         mainApp.factory('dashboardFactory', function ($http)
         {
             var data = {};
@@ -149,7 +202,7 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                 .success(function (result) {
                     if (result.email == $scope.registerUser.email && result.password == $scope.registerUser.password) {
 
-                        alert("Register Complete! Please Login")
+                        alert("Registration Complete! Please Login")
                         $window.location.href = '/'
                     }
                     else {
@@ -204,46 +257,4 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
 
 
 
-        var hudControllers = angular.module('hudControllers', []);
-
-        hudControllers.controller('PropertyDetailsCtrl', 
-          ['$scope','$window','$http', function ($scope,$window,$http) {
-
-              //I want to reload this once the newCommentForm below has been submitted
-              $scope.initFirst=function()
-              {
-
-
-                  $http.get('/api/comments')
-                   .success(function(data) {})
-                   .error(function(data) {});
-
-                       //You need to define your required $scope.....
-
-                       $scope.myVariable=data;
-
-              };
-
-              $scope.newCommentForm = function(){
-
-                  newComment=$scope.newComment;
-                  requestUrl='/api/comments';
-                  var request = $http({method: "post",url: requestUrl,data: {}});
-                  request.success(function(data){
-                      //How do I refresh/reload the comments?
-                      //without calling anything else, you can update your $scope.myVariable here directly like this
-
-
-                      $scope.myVariable=data
-
-
-                  });
-
-                  //or else you can call 'initFirst()' method whenever and wherever needed like this,
-
-                  $scope.initFirst();
-
-
-              };
-
-          }]);
+       
