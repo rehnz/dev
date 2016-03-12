@@ -25,7 +25,7 @@
     <div class="container" ng-controller="dashboardController" ng-init="getMasterData()">
 
 
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -85,71 +85,70 @@
             </div>
 
 
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
-    <div class="row">
-        <table class="table table-responsive table-hover">
+<div class="col-md-8">
+    <div class="panel panel-default">
+        <div class="panel-body">
+        <div class="row">
+            <table class="table table-responsive table-hover"style="display: block; border-bottom:2px groove #3c3c3c; max-height: 433px; overflow-y: scroll">
 
-            <thead>
-                <tr style="font-size:20px;">
-                    <th>Course</th>
-                    <th>Score</th>
-                    <th>Date</th>
-                    <th>Last 10:</th>
-                </tr>
-            </thead>
+                <thead >
+                    <tr style="font-size:20px;">
+                        <th>Course</th>
+                        <th>Score</th>
+                        <th>Date</th>
+                        <th>Last 10:</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr ng-repeat="score in scoresModel">
-                    <td>
-                        <div ng-hide="editScoresData[score.id]">{{score.coursename}}</div>
-                        <div ng-show="editScoresData[score.id]">{{score.coursename}}</div>
-                       
-                    </td>
-                    <td>
-                        <div ng-hide="editScoresData[score.id]" style="color:#1c9750"><b>{{score.score}}</b></div>
-                        <div ng-show="editScoresData[score.id]"><input type="text" class="form-control" ng-model="score.score" /></div>
-                    </td>
-                    <td>
-                        <div ng-hide="editScoresData[score.id]">{{score.dateplayed}}</div>
-                        <div ng-show="editScoresData[score.id]">{{score.dateplayed}}</div>
-                    </td>
-                   
-    <td class="text-center">
-        <button class="btn btn-info btn-block" ng-hide="editScoresData[score.id]" ng-click="editScore(score)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-        <button class="btn btn-info btn-block" ng-show="editScoresData[score.id]" ng-click="update(score)"><span class="glyphicon glyphicon-edit"></span> Update</button>
-    </td>
-    <td class="text-center">
-        <button class="btn btn-primary btn-block" ng-click="deleteScore(score.id,score.courseid,score.dateplayed,score.score)"><span class="glyphicon glyphicon-remove"></span>Del</button>
-    </td>
+                <tbody>
+                    <tr ng-repeat="score in scoresModel">
+                        <td>
+                            <div ng-hide="editScoresData[score.id]">{{score.coursename}}</div>
+                            <div ng-show="editScoresData[score.id]">{{score.coursename}}</div>
 
-                                </tr>
+                        </td>
+                        <td>
+                            <div ng-hide="editScoresData[score.id]" style="color:#1c9750"><b>{{score.score}}</b></div>
+                            <div ng-show="editScoresData[score.id]"><input type="text" class="form-control" ng-model="score.score" style="width:50px;" /></div>
+                        </td>
+                        <td>
+                            <div ng-hide="editScoresData[score.id]">{{score.dateplayed}}</div>
+                            <div ng-show="editScoresData[score.id]">{{score.dateplayed}}</div>
+                        </td>
+
+                        <td class="text-center">
+                            <button class="btn btn-info form-control" ng-hide="editScoresData[score.id]" ng-click="editScore(score)"><span class="glyphicon glyphicon-edit"></span> Edit Score</button>
+                            <button class="btn btn-info form-control" ng-show="editScoresData[score.id]" ng-click="update(score)"><span class="glyphicon glyphicon-edit"></span> Update</button>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-primary btn-block" ng-click="deleteScore(score.id,score.courseid,score.dateplayed,score.score)"><span class="glyphicon glyphicon-remove"></span>  Delete</button>
+                        </td>
+
+                    </tr>
+                </tbody>
 
 
-                            </tbody>
-                        </table>
-    <div class="col-xs-12 col-sm-4">
-        <h2><strong> - </strong></h2>
-        <p><small>Something</small></p>
-        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#newScoreModal"><span class="fa fa-plus-circle"></span> Add Score </button>
-    </div><!--/col-->
-    <div class="col-xs-12 col-sm-4">
-        <h2><strong>-</strong></h2>
-        <p><small>Something</small></p>
-        <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View All Scores </button>
-    </div><!--/col-->
-    <div class="col-xs-12 col-sm-4">
-        <h2><strong>-</strong></h2>
-        <p><small>Something</small></p>
-        <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> Click </button>
-    </div><!--/col-->
+
+</table>
+                        <div class="col-xs-12 col-sm-4">
+                            <h2><strong> - </strong></h2>
+                            <p><small>Something</small></p>
+                            <button class="btn btn-success btn-block" data-toggle="modal" data-target="#newScoreModal"><span class="fa fa-plus-circle"></span> Add Score </button>
+                        </div><!--/col-->
+                        <div class="col-xs-12 col-sm-4">
+                            <h2><strong>-</strong></h2>
+                            <p><small>Something</small></p>
+                            <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View All Scores </button>
+                        </div><!--/col-->
+                        <div class="col-xs-12 col-sm-4">
+                            <h2><strong>-</strong></h2>
+                            <p><small>Something</small></p>
+                            <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> Click </button>
+                        </div><!--/col-->
             </div>
-                </div>
-            </div>
-
-
         </div>
+    </div>
+ </div>
 
 
 
@@ -162,7 +161,7 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="modal-title">Add Score:</h4>
-</div>
+                                </div>
                                 <!--Start form-->
                                 <form class="form-horizontal" name="newScoreForm" ng-submit="sendForm()">
                                     <div class="modal-body">
@@ -217,4 +216,4 @@
 
 
     }
-                }
+ }
