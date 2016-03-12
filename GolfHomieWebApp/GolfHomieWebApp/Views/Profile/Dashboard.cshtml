@@ -105,7 +105,8 @@
                                     <td>{{score.coursename}}</td>
                                     <td style="color:#3a8b5a"><b>{{score.score}}</b></td>
                                     <td>{{score.dateplayed}}
-                                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" ng- ng-click="deleteScore(score.id)" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+                                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> 
+                                                            <a href="#" ng-click="deleteScore(score.id)" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
 
                                 </tr>
 
@@ -167,7 +168,7 @@
                                         </div>
 
                                         <!-- Date Played -->
-                                        <div class="form-group" ng-controller="DatepickerDemoCtrl">
+                                        <div class="form-group" ng-controller="datepickerController">
                                             <label class="col-sm-4 control-label" for="dateplayed">Date Played:</label>
 
 
