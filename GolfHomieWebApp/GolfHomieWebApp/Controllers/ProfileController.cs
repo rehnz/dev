@@ -25,7 +25,7 @@ namespace GolfHomieWebApp.Controllers
             DataTable scoresDT = new DataTable();
 
             scoresDT = dtGen.GetDataTable(@"
-                                            select top 10 scores.id,users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed 
+                                            select top 20 scores.id,users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed 
                                             from scores  inner join users 
                                             on scores.userid = users.id
                                             inner join courses on courses.id = scores.courseid
@@ -58,8 +58,14 @@ namespace GolfHomieWebApp.Controllers
            
 
             SqlTool sqltool = new SqlTool();
+            HandicapCalculator handicap = new HandicapCalculator();
+
+            //populate Course Model
+
+            decimal adjustedScore = handicap.AdjustScore(newScore.score, newScore.courseid);
+            
             string newScoreInsert = String.Format(@"INSERT INTO Scores(userid,courseid,score,dateplayed,adjustedscore) SELECT {0},{1},{2},'{3}',{4}",
-                                                                    Session["id"], newScore.courseid, newScore.score, newScore.dateplayed.ToShortDateString(), 50);
+                                                                    Session["id"], newScore.courseid, newScore.score, newScore.dateplayed.ToShortDateString(), adjustedScore);
             
             sqltool.runQuery(newScoreInsert);
             return Json(newScore, JsonRequestBehavior.AllowGet);
@@ -90,6 +96,20 @@ namespace GolfHomieWebApp.Controllers
 
 
         }
+
+        public JsonResult UpdateScore(ScoresModel scoreToUpdate)
+        {
+            SqlTool sql = new SqlTool();
+
+            string updateScoreQuery = @"Update scores set Score = " + scoreToUpdate.score + " where id = " + scoreToUpdate.id;
+            sql.runQuery(updateScoreQuery);
+
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+       
+
 
     }
 }

@@ -43,4 +43,16 @@ namespace GolfHomieWebApp.Models
 
 
     }
+
+    public class CoursesModel
+    {
+
+        public int id {get;set;}
+        public string coursename {get;set;}
+        public int par {get;set;}
+        public decimal blueteerating { get; set;}
+        public decimal whiteteerating { get; set; }
+        public decimal courseslope { get; set; }
+        public int addressid { get; set; }
+    }
 }

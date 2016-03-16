@@ -36,14 +36,21 @@
                             <p><strong>Quote: </strong> Ballin outta control' </p>
                             <p>
                                 <strong>Handicap: </strong>
-                                <span class="label label-success tags">13</span>
+                                <span class="label label-success tags">{{handicap}}</span>
 
                             </p>
                         </div><!--/col-->
                         <div class="col-xs-12 col-sm-4 text-center">
-                            <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="" class="center-block img-circle img-responsive">
+                            <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="" class="center-block img-circle img-responsive" style="padding-bottom:5px;">
                             <ul class="list-inline ratings text-center" title="Ratings">
-                                <li><a href="#">@Session["username"]</a></li>
+                              
+                                <li>
+                                    <form name="picUploadForm" ng-submit="sendPic()">
+                                        <input type="file" name="file" id="file" class="inputfile" />
+                                        <label for="file" class="btn btn-group-sm btn-success">@Session["username"]</label>
+                                        @*<button type="submit" class="btn btn-success" ng-hide="bool">Save</button>*@
+                                    </form>
+                                </li>
 
                             </ul>
                         </div><!--/col-->

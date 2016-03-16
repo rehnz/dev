@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Models\DataTableGenerator.cs" />
     <Compile Include="Models\DBConnectionStrings.cs" />
+    <Compile Include="Models\HandicapCalculator.cs" />
     <Compile Include="Models\SqlTool.cs" />
     <Compile Include="Models\TableModels.cs" />
     <Compile Include="Models\UsersVM.cs" />

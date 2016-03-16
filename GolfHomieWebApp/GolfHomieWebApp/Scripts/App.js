@@ -56,17 +56,25 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
     mainApp.controller('dashboardController',function ($scope,dashboardFactory,$http)
     {
 
-        $scope.scoresModel  = {}
+        $scope.scoresModel = {}
+        $scope.handicap = 0;
         $scope.getMasterData = function ()
         {
             dashboardFactory.getScores().success(function (data) {
 
                 $scope.scoresData = JSON.parse(data)
 
-                for (var i in $scope.scoresData) {
+                for (var i in $scope.scoresData)
+                {
                     $scope.scoresData[i].dateplayed = (new Date(parseInt($scope.scoresData[i].dateplayed.substr(6)))).toJSON();
                     $scope.scoresModel = $scope.scoresData;
                 }
+                var sum = 0;
+                for (var i = 0; i < $scope.scoresData.length; i++)
+                {
+                    sum += parseInt($scope.scoresData[i].score, 10); //don't forget to add the base
+                }
+
             }).error(function () {
                 //error logic
 
@@ -139,12 +147,19 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
             $scope.editScoresData[score.id] = true;
         };
 
-        $scope.update = function (score) {
 
+
+
+        ///update scores
+        $scope.scoreToUpdate = {};
+        $scope.update = function (score) {
+            $scope.scoreToUpdate.id = score.id;
+            $scope.scoreToUpdate.score = score.score;
+            $scope.scoreToUpdate.dateplayed = score.dateplayed;
             $http({
                 method: 'POST',
                 url: '/Profile/UpdateScore',
-
+                data: $scope.scoreToUpdate
 
             })
             $scope.editScoresData[score.id] = false;
