@@ -25,7 +25,7 @@ namespace GolfHomieWebApp.Controllers
             DataTable scoresDT = new DataTable();
 
             scoresDT = dtGen.GetDataTable(@"
-                                            select top 20 scores.id,users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed 
+                                            select top 20 scores.id,users.id,scores.courseid,courses.coursename,scores.score,scores.dateplayed,scores.adjustedscore
                                             from scores  inner join users 
                                             on scores.userid = users.id
                                             inner join courses on courses.id = scores.courseid

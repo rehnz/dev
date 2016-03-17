@@ -69,10 +69,24 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                     $scope.scoresData[i].dateplayed = (new Date(parseInt($scope.scoresData[i].dateplayed.substr(6)))).toJSON();
                     $scope.scoresModel = $scope.scoresData;
                 }
+
+                //handicap calculator
                 var sum = 0;
                 for (var i = 0; i < $scope.scoresData.length; i++)
                 {
-                    sum += parseInt($scope.scoresData[i].score, 10); //don't forget to add the base
+                    sum += parseInt($scope.scoresData[i].adjustedscore, 10); //don't forget to add the base
+
+                }       
+                   
+                var handicapValue = Math.round((sum / $scope.scoresData.length) * .96)
+
+                if(handicapValue <= 0)
+                {
+                    $scope.handicap = 'Scratch';
+                }
+                else
+                {
+                    $scope.handicap = handicapValue;
                 }
 
             }).error(function () {
