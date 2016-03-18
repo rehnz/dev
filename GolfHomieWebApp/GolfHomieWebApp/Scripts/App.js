@@ -56,22 +56,30 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
     mainApp.controller('dashboardController',function ($scope,dashboardFactory,$http)
     {
 
-        $scope.scoresModel = {}
+        $scope.scoresModel = {};
         $scope.handicap = 0;
+        $scope.coursesModel = {};
+  
         $scope.getMasterData = function ()
         {
-            dashboardFactory.getScores().success(function (data) {
-
-                $scope.scoresData = JSON.parse(data)
+            dashboardFactory.getScores().success(function(data)
+            {
+               
+                $scope.scoresData = JSON.parse(data);
+             
+            
 
                 for (var i in $scope.scoresData)
                 {
                     $scope.scoresData[i].dateplayed = (new Date(parseInt($scope.scoresData[i].dateplayed.substr(6)))).toJSON();
-                    $scope.scoresModel = $scope.scoresData;
+                   
                 }
+            
 
                 //handicap calculator
                 var sum = 0;
+
+                
                 for (var i = 0; i < $scope.scoresData.length; i++)
                 {
                     sum += parseInt($scope.scoresData[i].adjustedscore, 10); //don't forget to add the base
@@ -88,16 +96,16 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                 {
                     $scope.handicap = handicapValue;
                 }
-
-            }).error(function () {
-                //error logic
-
-            });
-
-            dashboardFactory.getCourses().success(function (courseData) {
-                $scope.coursesModel = JSON.parse(courseData);
-
+                
+                $scope.scoresModel = $scope.scoresData;
             })
+
+                dashboardFactory.getCourses().success(function(data)
+                {
+                    $scope.coursesModel = JSON.parse(data);
+                })
+
+            
         };
         
       
@@ -114,8 +122,9 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                 data: $scope.newScore
             }).success(function (result) {
                 alert("Score Added")   
-                $scope.getMasterData();
+               
                 $scope.newScore = null;
+                $scope.getMasterData();
 
             })
 
@@ -141,8 +150,9 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                 }).success(function()
                         {
                             alert("Score Deleted")
-                            $scope.getMasterData();
+                          
                             $scope.scoreToDelete = {};
+                            $scope.getMasterData();
                         })
 
         }
@@ -169,15 +179,23 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
         $scope.update = function (score) {
             $scope.scoreToUpdate.id = score.id;
             $scope.scoreToUpdate.score = score.score;
+            $scope.scoreToUpdate.courseid = score.courseid;
+            $scope.scoreToUpdate.adjustedscore = score.adjustedscore;
             $scope.scoreToUpdate.dateplayed = score.dateplayed;
             $http({
                 method: 'POST',
                 url: '/Profile/UpdateScore',
                 data: $scope.scoreToUpdate
 
+            }).success(function () {
+                alert("Score Updated")
+                $scope.editScoresData[score.id] = false;
+                $scope.scoreToDelete = {};
+                $scope.getMasterData();
             })
-            $scope.editScoresData[score.id] = false;
-        };
+           
+            
+        }
 
       
     })

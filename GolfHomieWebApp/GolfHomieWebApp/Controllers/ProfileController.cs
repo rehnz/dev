@@ -100,8 +100,10 @@ namespace GolfHomieWebApp.Controllers
         public JsonResult UpdateScore(ScoresModel scoreToUpdate)
         {
             SqlTool sql = new SqlTool();
+            HandicapCalculator handicap = new HandicapCalculator();
+            decimal adjustedScore = handicap.AdjustScore(scoreToUpdate.score, scoreToUpdate.courseid);
 
-            string updateScoreQuery = @"Update scores set Score = " + scoreToUpdate.score + " where id = " + scoreToUpdate.id;
+            string updateScoreQuery = @"Update scores set Score = " + scoreToUpdate.score + ",adjustedscore = " + adjustedScore + " where id = " + scoreToUpdate.id;
             sql.runQuery(updateScoreQuery);
 
 
