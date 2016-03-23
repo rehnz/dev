@@ -3,6 +3,17 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
 
 
 
+mainApp.filter("dateFilter", function () {
+    return function (item) {
+        if (item != null) {
+            return new Date(parseInt(item.substr(6)));
+        }
+        return "";
+    };
+});
+
+
+
 //Get a list of Users
     mainApp.controller('usersController', function ($scope, $http)
 {
@@ -53,7 +64,7 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
     })
 
 //controller for the Dashboard View
-    mainApp.controller('dashboardController',function ($scope,dashboardFactory,$http)
+    mainApp.controller('dashboardController',function ($scope,dashboardFactory,dateFilter,$http)
     {
 
         $scope.scoresModel = {};
@@ -69,11 +80,11 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
              
             
 
-                for (var i in $scope.scoresData)
-                {
-                    $scope.scoresData[i].dateplayed = (new Date(parseInt($scope.scoresData[i].dateplayed.substr(6)))).toJSON();
+                //for (var i in $scope.scoresData)
+                //{
+                //    //$scope.scoresData[i].dateplayed = (new Date(parseInt($scope.scoresData[i].dateplayed.substr(6)))).toJSON();
                    
-                }
+                //}
             
 
                 //handicap calculator
@@ -149,7 +160,7 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                     data: $scope.scoreToDelete
                 }).success(function()
                         {
-                            alert("Score Deleted")
+                          
                           
                             $scope.scoreToDelete = {};
                             $scope.getMasterData();
@@ -188,7 +199,7 @@ var mainApp = angular.module('mainApp', ['ui.bootstrap']);
                 data: $scope.scoreToUpdate
 
             }).success(function () {
-                alert("Score Updated")
+               
                 $scope.editScoresData[score.id] = false;
                 $scope.scoreToDelete = {};
                 $scope.getMasterData();
